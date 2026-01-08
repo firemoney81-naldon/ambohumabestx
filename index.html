@@ -1,23 +1,570 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <!-- Schema Markup for Cancer Insurance Service -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "암보험금 청구 가이드 및 상품 비교",
+      "provider": {
+        "@type": "Organization",
+        "name": "암보험금 전문 상담 센터",
+        "url": "https://yourdomain.com",
+        "logo": "https://yourdomain.com/logo.png"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "대한민국"
+      },
+      "description": "2026년 최신 암보험 상품을 비교 분석하고, 암보험금 청구 절차와 노하우를 제공합니다. 고객 맞춤형 상담을 통해 최적의 암보험 상품을 추천합니다.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "암보험 주요 보장 비교",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "일반암 진단금"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "50000000",
+              "priceCurrency": "KRW",
+              "description": "가장 기본적인 암 진단금으로, 전체 암 진단의 80% 이상을 차지하는 주요 암을 보장합니다."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "고액암 진단금"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "100000000",
+              "priceCurrency": "KRW",
+              "description": "치료비가 많이 드는 뼈암, 뇌암 등 특정 고액암에 대해 추가 보장을 제공합니다."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "@id": "https://yourdomain.com/minor_cancer_diagnosis_fund",
+              "name": "소액암 진단금"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "10000000",
+              "priceCurrency": "KRW",
+              "description": "갑상선암, 제자리암 등 비교적 치료가 용이한 암에 대해 일반암보다 적은 금액을 보장합니다."
+            }
+          }
+        ]
+      },
+      "url": "https://yourdomain.com"
+    }
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            background-color: #f7f9fc; /* 부드러운 배경색 */
+            color: #333;
+        }
+        header {
+            background-color: #007bff; /* 메인 색상 */
+            color: white;
+            padding: 3rem 1.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.9), rgba(4, 91, 185, 0.8));
+            z-index: -1;
+        }
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+        }
+        header p {
+            font-size: 1.2rem;
+            margin-top: 0.8rem;
+            opacity: 0.9;
+        }
+        h2 {
+            color: #007bff;
+            font-size: 2.2rem;
+            margin-top: 2.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid #007bff;
+            display: inline-block;
+            text-align: left;
+            font-weight: 700;
+        }
+        h3 {
+            font-size: 1.6rem;
+            color: #34495e;
+            margin-top: 2rem;
+            border-left: 5px solid #007bff;
+            padding-left: 1rem;
+            font-weight: 500;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        section {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+        }
+        section p, section ul, section dl {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        th, td {
+            padding: 1.4rem;
+            text-align: center;
+            font-size: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: 700;
+        }
+        tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        .highlight-text {
+            font-weight: 700;
+            color: #e65c52; /* 강조 색상 */
+            font-size: 1.1rem;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #ff6f61; /* 강조 색상 */
+            color: white;
+            font-weight: 700;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            margin: 2rem 0;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(255, 111, 97, 0.4);
+            font-size: 1.1rem;
+        }
+        .cta-button:hover {
+            background-color: #e65c52;
+            transform: translateY(-3px);
+        }
+        .keyword-tags {
+            margin: 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .keyword-tags a {
+            background-color: #e3f2fd;
+            color: #007bff;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        .keyword-tags a:hover {
+            background-color: #bbdefb;
+        }
+        .external-links ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+        .external-links li {
+            margin-bottom: 15px;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .external-links li::before {
+            content: '🔗'; /* Link icon without emoji */
+            position: absolute;
+            left: 0;
+            color: #007bff;
+            font-size: 1.2rem;
+        }
+        .external-links a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .external-links a:hover {
+            text-decoration: underline;
+        }
+        .check-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            list-style: none;
+            font-size: 1.05rem;
+        }
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #28a745;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            font-size: 0.95rem;
+            color: #888;
+            background-color: #e9ecef;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            margin-top: 3rem;
+        }
+        .comparison-table {
+            border-radius: 10px;
+            overflow: hidden;
+            border: none;
+        }
+        .comparison-table th {
+            background-color: #f0f4f8;
+            color: #333;
+            border-bottom: none;
+            border-right: 1px solid #ddd;
+        }
+        .comparison-table td {
+            border-left: none;
+        }
+        .comparison-table tr:hover {
+            background-color: #f1f8ff;
+        }
+        .form-container {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+        .form-container input[type="text"], .form-container select, .form-container textarea {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .form-container button {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: background-color 0.3s;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+        /* FAQ accordion styles */
+        .faq dl {
+            margin-top: 1.5rem;
+        }
+        .faq dt {
+            cursor: pointer;
+            background-color: #f9f9f9;
+            padding: 1.2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+        .faq dt:hover {
+            background-color: #f0f0f0;
+        }
+        .faq dt.active {
+            background-color: #eef7ff;
+            color: #007bff;
+        }
+        .faq dd {
+            padding: 1.5rem 1.2rem;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            border-left: 3px solid #007bff;
+            margin-top: -1px;
+            display: none; /* initial state */
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .faq dt.active + dd {
+            display: block;
+            animation: fadeIn 0.5s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>암보험금 청구, 제대로 받고 계신가요? 2026년 가이드</h1>
+        <p>복잡한 암보험금 청구 절차와 숨겨진 보장 내용까지, 전문가가 알려주는 완벽 가이드.</p>
+        <nav>
+            <ul>
+                <li><a href="#guide">가입 가이드</a></li>
+                <li><a href="#price_comparison">금액 비교</a></li>
+                <li><a href="#claim_info">청구 노하우</a></li>
+                <li><a href="#consultation">전문 상담</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <section id="guide">
+            <h2>암보험금 가입 가이드: 2026년 핵심 체크포인트</h2>
+            <p><strong>암보험금</strong>은 암 진단 시 고액의 치료비와 생활 자금을 보장받기 위한 핵심 보장 항목입니다. 2026년 현재, 의료 기술의 발전과 함께 암 발병률이 증가하면서 암보험의 필요성은 더욱 강조되고 있습니다. 하지만 단순히 <span class="highlight-text">암보험 저렴한곳</span>이나 <span class="highlight-text">암보험 싼곳</span>만을 찾는 것은 위험합니다. 보험사별로 보장 범위와 청구 조건이 다르기 때문에, <span class="highlight-text">암보험 추천</span> 상품을 신중하게 비교하는 것이 중요합니다.</p>
+
+            <h3>1. 비갱신형 vs 갱신형: 암보험 가입 시 가장 중요한 차이점</h3>
+            <p>암보험을 선택할 때 가장 먼저 고려해야 할 것은 <span class="highlight-text">비갱신형</span>과 <span class="highlight-text">갱신형</span> 중 어떤 것을 선택할지입니다. 두 가지 유형은 보험료 납입 방식과 총 납입 금액에서 큰 차이를 보입니다. 비갱신형은 초기 보험료가 다소 높을 수 있지만, 가입 시점부터 만기까지 보험료가 변동되지 않습니다. 반면 갱신형은 초기 보험료가 저렴하지만, 일정 기간(보통 10년, 20년)마다 보험료가 갱신되어 나이가 들수록 보험료가 급격하게 상승할 수 있습니다. <span class="highlight-text">암보험 장단점</span>을 명확히 이해하고 자신에게 맞는 유형을 선택해야 합니다. 젊을 때 가입할 경우 총 납입액 측면에서 <span class="highlight-text">비갱신형 암보험</span>이 장기적으로 유리할 수 있습니다.</p>
+
+            <div class="keyword-tags" aria-label="관련 암보험 키워드">
+                <a href="#price_comparison">암보험금 평균</a>
+                <a href="#guide">암보험 가입</a>
+                <a href="#price_comparison">비갱신형 암보험</a>
+                <a href="#guide">암보험 장단점</a>
+                <a href="#claim_info">암보험금 청구 절차</a>
+                <a href="#consultation">암보험 추천 순위</a>
+                <a href="#guide">암보험 차이점</a>
+            </div>
+            
+            <h3>2. 일반암, 고액암, 소액암: 보장 범위 완벽 분석</h3>
+            <p>암 진단금은 암의 종류에 따라 지급되는 금액이 달라집니다. 보험사에서는 암을 크게 <span class="highlight-text">일반암</span>, <span class="highlight-text">고액암</span>, <span class="highlight-text">소액암</span>으로 분류합니다. <span class="highlight-text">일반암 진단금</span>은 가장 기본이 되는 보장으로, 위암, 폐암, 간암 등이 포함됩니다. <span class="highlight-text">고액암 진단금</span>은 치료비가 특히 많이 드는 뼈암, 뇌암, 림프종 등에 대해 일반암 진단금에 추가로 지급됩니다. <span class="highlight-text">소액암 진단금</span>은 갑상선암, 제자리암, 경계성 종양 등 치료가 비교적 간단하고 생존율이 높은 암에 대해 일반암의 10~20%만 지급하는 경우가 많습니다. <span class="highlight-text">암보험금 금액</span>을 비교할 때, 일반암 보장 금액과 함께 소액암의 범위를 확인하는 것이 중요합니다. 특히 갑상선암은 발병률이 높기 때문에 소액암으로 분류되는지 여부를 꼼꼼히 체크해야 합니다.</p>
+            
+            <h3>3. 2026년 암보험 트렌드: 면책기간과 감액기간</h3>
+            <p>2026년 현재 암보험 가입 시, <span class="highlight-text">면책기간</span>과 <span class="highlight-text">감액기간</span>에 대한 이해가 필수적입니다. 면책기간은 가입 후 일정 기간(보통 90일) 동안 암 진단을 받아도 보험금이 지급되지 않는 기간을 말합니다. 감액기간은 면책기간 이후 1~2년 동안 진단금의 50%만 지급하는 기간입니다. 이 두 기간은 보험사별로 다를 수 있으므로 <span class="highlight-text">암보험 가입</span> 전에 반드시 확인해야 합니다. 특히 <span class="highlight-text">암보험금 예상</span> 금액을 계산할 때 이 기간을 고려해야 실제 청구 시점에 혼란을 줄일 수 있습니다.</p>
+
+        </section>
+
+        <section id="price_comparison">
+            <h2>암보험금 평균 금액 및 보장 내용 비교 분석</h2>
+            <p>암보험금 청구 금액은 가입한 상품의 보장 내용에 따라 크게 달라집니다. <span class="highlight-text">암보험금 평균</span> 금액은 통계청 자료와 보험사 지급 데이터를 기반으로 산출할 수 있으며, 실제 <span class="highlight-text">암보험금</span> 지급 금액은 개개인의 가입 금액에 따라 다릅니다. 이 섹션에서는 주요 암 유형별 <span class="highlight-text">진단금</span>과 <span class="highlight-text">치료비</span>를 비교하여 합리적인 <span class="highlight-text">암보험 추천</span> 기준을 제시합니다.</p>
+
+            <h3>1. 주요 암 유형별 진단금 및 치료비 통계 (2026년 기준)</h3>
+            <p>암 치료비는 암의 종류, 진행 정도, 치료 방식(수술, 항암 방사선, 면역 치료 등)에 따라 천차만별입니다. 특히 비급여 항목이 많은 고액암의 경우, 치료비 부담이 매우 클 수 있습니다. 다음 표는 주요 암 종류별 평균 치료비와 적정 진단금 <span class="highlight-text">예상</span> 금액을 비교한 것입니다.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>암 유형 (분류)</th>
+                        <th>평균 치료비 (2026년 예상)</th>
+                        <th>적정 암보험금 추천 금액</th>
+                        <th>주요 특징 및 주의사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>일반암 (위암, 폐암, 간암)</td>
+                        <td>3,000만 원 ~ 8,000만 원</td>
+                        <td><span class="highlight-text">5,000만 원 이상</span></td>
+                        <td>국민건강보험공단 급여 항목 외 비급여 항목(표적 항암치료 등) 비용이 높음.</td>
+                    </tr>
+                    <tr>
+                        <td>고액암 (뇌암, 뼈암, 혈액암)</td>
+                        <td>5,000만 원 ~ 1억 5,000만 원 이상</td>
+                        <td><span class="highlight-text">별도 고액암 특약 필수</span></td>
+                        <td>치료 기간이 길고 고가 항암 치료 비중이 높아 <span class="highlight-text">암보험금 금액</span>이 커야 함.</td>
+                    </tr>
+                    <tr>
+                        <td>소액암 (갑상선암, 제자리암)</td>
+                        <td>1,000만 원 ~ 3,000만 원</td>
+                        <td><span class="highlight-text">일반암의 10~20% 보장</span></td>
+                        <td>발병률이 높아 많은 보험사에서 보장 금액을 축소하고 있음. 가입 전 확인 필요.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2. 보험료 산정 기준: 나이, 성별, 직업에 따른 차이</h3>
+            <p>암보험료는 가입자의 특성에 따라 달라집니다. <span class="highlight-text">암보험료 평균</span>은 나이가 많을수록, 위험 직업군에 속할수록 높아집니다. <span class="highlight-text">암보험 가입</span> 시 연령별 보험료 <span class="highlight-text">예상</span>치를 비교하는 것이 중요합니다. 특히 여성은 갑상선암 발병률이 높고, 남성은 폐암, 간암 발병률이 높기 때문에 성별에 따라 보험료가 다르게 책정되기도 합니다.</p>
+            <p>저렴하게 가입하려면 젊을 때 <span class="highlight-text">비갱신형</span>으로 가입하는 것이 가장 유리합니다. 또한, <span class="highlight-text">암보험 저렴한곳</span>을 찾을 때 보장 내용이 부실한 상품보다는, 필수 보장 항목은 포함하되 불필요한 특약(입원비, 수술비 등)을 제외하여 보험료를 낮추는 것이 현명한 방법입니다. <span class="highlight-text">암보험 싼곳</span>은 단순히 가격만 보고 결정할 것이 아니라, 여러 보험사의 상품을 비교하여 최적의 가성비를 찾는 것이 핵심입니다.</p>
+
+        </section>
+
+        <section id="claim_info">
+            <h2>암보험금 청구 노하우: 빠짐없이 받는 방법 (2026년 최신)</h2>
+            <p><strong>암보험금 청구</strong>는 가입만큼이나 중요한 과정입니다. 실제로 많은 가입자들이 복잡한 절차와 약관 때문에 제대로 <span class="highlight-text">암진단금</span>을 받지 못하거나, 예상 금액보다 적은 금액을 받고 당황하는 경우가 많습니다. <span class="highlight-text">암보험 후기</span>들을 살펴보면 청구 과정에서 보험사와 분쟁이 발생하는 사례도 적지 않습니다. 2026년 기준으로 <span class="highlight-text">암보험금 청구</span> 시 유의해야 할 핵심 노하우를 정리했습니다.</p>
+
+            <h3>1. 암보험금 청구 필수 서류 및 절차</h3>
+            <p>보험금 청구 시에는 정확한 서류를 제출하는 것이 중요합니다. 기본적으로 진단서(질병분류코드 C코드), 조직검사 결과지, 진료기록 사본, 보험금 청구서 등이 필요합니다. 특히 <span class="highlight-text">암보험금 청구</span> 시에는 의사의 <span class="highlight-text">진단서</span>에 명시된 질병분류코드(C코드)가 보험 약관상의 보장 대상인지 확인해야 합니다. 일부 보험사에서는 <span class="highlight-text">소액암</span>을 일반암으로 청구하려는 경우를 방지하기 위해 추가 서류를 요청하기도 합니다.</p>
+            <p>청구 절차는 간단하지만, 보험사별로 요구하는 서류가 조금씩 다를 수 있으므로 청구 전에 반드시 고객센터에 문의하여 확인하는 것이 좋습니다. 최근에는 모바일 앱을 통한 청구도 가능하지만, 고액의 <span class="highlight-text">암진단금</span> 청구의 경우 서류 원본 제출을 요구하는 경우가 많습니다.</p>
+
+            <h3>2. 보험금 지급 거절 사유 및 대처법</h3>
+            <p>암보험금 청구가 거절되는 대표적인 사유 중 하나는 <span class="highlight-text">고지의무 위반</span>입니다. 가입 전 병력이나 투약 사실을 제대로 알리지 않은 경우, 암 진단을 받아도 보험금 지급이 거절될 수 있습니다. 특히 경계성 종양이나 양성 종양으로 진단받은 경우 <span class="highlight-text">암보험금 청구</span>가 거절되거나 <span class="highlight-text">소액암 진단금</span>만 지급될 수 있습니다. <span class="highlight-text">암보험 가입</span> 시에는 고지의무를 철저히 지키는 것이 중요합니다. 만약 부당하게 <span class="highlight-text">암보험금</span> 지급이 거절되었다고 생각되면, 금융감독원이나 보험사 분쟁조정위원회에 민원을 제기할 수 있습니다.</p>
+            
+            <h3>3. 면책기간 중 진단 시 대응법</h3>
+            <p>면책기간(90일) 동안 암 진단을 받은 경우 보험금 지급이 어렵습니다. 하지만 <span class="highlight-text">면책기간 중 진단</span>받았더라도 진단 시점의 약관 해석에 따라 보험금 지급 여부가 달라질 수 있습니다. 특히 <span class="highlight-text">내돈내산</span> 암보험 <span class="highlight-text">후기</span>들을 보면, 면책기간을 제대로 확인하지 않고 가입하여 손해를 보는 경우가 많습니다. <span class="highlight-text">암보험 가입</span> 시에는 면책기간이 짧은 상품을 선택하거나, 가입 직후에는 정기적인 건강검진을 피하는 등 신중한 관리가 필요합니다.</p>
+
+            <div class="check-list-container">
+                <h3>암보험금 청구 성공을 위한 체크리스트</h3>
+                <ul class="check-list">
+                    <li>청구서류 목록 재확인: 보험사마다 요구하는 서류가 다르니 사전에 확인합니다.</li>
+                    <li>고지의무 위반 여부 점검: 가입 당시 고지의무 이행 여부를 점검합니다.</li>
+                    <li>암 진단 확정 시점 확인: 면책기간(90일) 및 감액기간(1~2년)을 확인합니다.</li>
+                    <li>최신 약관 확인: 약관 변경사항에 따라 보장 범위가 달라질 수 있습니다.</li>
+                    <li>전문가 상담 요청: 복잡한 청구 건은 전문가의 도움을 받습니다.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="external-links">
+            <h2>신뢰성 있는 암보험금 관련 정보 출처</h2>
+            <p>암보험금 청구 및 가입 관련하여 공신력 있는 기관의 정보를 참고하여, 정확한 지식을 습득하고 현명하게 판단하세요.</p>
+            <ul>
+                <li><a href="https://www.fss.or.kr/" target="_blank">금융감독원 (FSS)</a>: 보험금 지급 및 분쟁조정 관련 공식 정보 제공</li>
+                <li><a href="https://www.nhis.or.kr/nhis/index.do" target="_blank">국민건강보험공단</a>: 암 치료비 관련 급여 항목 및 비급여 항목 정보</li>
+                <li><a href="https://namu.wiki/w/%EC%95%94%EB%B3%B4%ED%97%98" target="_blank">암보험 관련 나무위키 정보</a>: 암보험의 역사, 보장 내용, 상품 유형에 대한 상세 설명</li>
+                <li><a href="https://www.cancer.go.kr/index.do" target="_blank">국립암센터</a>: 암 종류별 통계 및 치료 방법 관련 전문 정보 제공</li>
+                <li><a href="https://yourdomain.com/blog/cancer_insurance_analysis" target="_blank">전문가 칼럼: 암보험금, 갱신형 vs 비갱신형 심층 분석</a></li>
+            </ul>
+        </section>
+
+        <section id="consultation">
+            <h2>전문가에게 문의하고 정확한 암보험금 견적 받기</h2>
+            <p><strong>암보험금</strong>은 <span class="highlight-text">가입</span>자의 상황(나이, 성별, 가족력)에 따라 <span class="highlight-text">추천</span> 상품이 달라집니다. 여러 보험사의 상품을 비교 분석하고, 나에게 딱 맞는 <span class="highlight-text">암보험 순위</span>를 파악하여 <span class="highlight-text">저렴한곳</span>을 찾는 것이 중요합니다. 아래 입력란에 정보를 남겨주시면 전문가가 <span class="highlight-text">암보험금 예상</span> 금액을 계산하여 맞춤형 <span class="highlight-text">상담</span>을 무료로 진행해 드립니다.</p>
+
+            <div class="form-container">
+                <h3>암보험금 무료 상담 신청</h3>
+                <form action="#" method="post">
+                    <label for="name">이름:</label>
+                    <input type="text" id="name" name="name" placeholder="홍길동" required>
+
+                    <label for="age">나이:</label>
+                    <input type="text" id="age" name="age" placeholder="만 30세" required>
+
+                    <label for="phone">연락처:</label>
+                    <input type="text" id="phone" name="phone" placeholder="010-1234-5678" required>
+
+                    <label for="insurance_type">관심 상품 유형 (선택):</label>
+                    <select id="insurance_type" name="insurance_type">
+                        <option value="non_renewal">비갱신형 암보험</option>
+                        <option value="renewal">갱신형 암보험</option>
+                        <option value="claim_consultation">보험금 청구 상담</option>
+                        <option value="comparison">상품 비교 문의</option>
+                    </select>
+
+                    <label for="message">문의 내용 (선택):</label>
+                    <textarea id="message" name="message" rows="4" placeholder="가족력, 기존 가입 보험 유무 등 자세한 내용을 남겨주시면 정확한 상담이 가능합니다."></textarea>
+
+                    <button type="submit">무료 상담 신청하기</button>
+                </form>
+            </div>
+            <p style="text-align: center; margin-top: 1rem; color: #888; font-size: 0.9rem;">* 모든 상담은 무료로 진행되며 개인정보는 상담 목적으로만 사용됩니다.</p>
+        </section>
     </main>
-  </body>
-</html>
+
+    <footer>
+        <p>&copy; 2026 암보험금 전문 상담 센터. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // FAQ 아코디언 기능 (접기/펼치기)
+        document.querySelectorAll('dl dt').forEach((dt) => {
+            dt.addEventListener('click', () => {
+                const isActive = dt.classList.contains('active');
+                const dd = dt.nextElementSibling;
+
+                document.querySelectorAll('dl dt').forEach(item => {
+                    item.classList.remove('active');
+                    item.setAttribute('aria-expanded', 'false');
+                    if (item.nextElementSibling) {
+                        item.nextElementSibling.style.display = 'none';
+                    }
+                });
+
+                if (!isActive) {
+                    dt.classList.add('active');
+                    dt.setAttribute('aria-expanded', 'true');
+                    dd.style.display = 'block';
+                }
+            });
+            dt.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dt.click();
+                }
+            });
+        });
+    </script>
+
+  
